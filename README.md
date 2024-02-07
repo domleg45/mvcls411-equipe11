@@ -1,2 +1,1 @@
-Repository pour notre conception d'une manette chromecast.
-Membres: Tommy Spagnuolo, Lam Nguyen, Ha-Vu William Nguyen
+Repository pour notre conception d'une manette chromecast ayant comme membres Tommy Spagnuolo, Lam Nguyen et Ha-Vu William Nguyen.
