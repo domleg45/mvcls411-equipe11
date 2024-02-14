@@ -12,22 +12,16 @@ import Back from './back';
 
 function remote() {
   return (
-    <div className="container">
-      <div className='row'>
-        <VolumeController className='col'/>
-        <Up className='col'/>
-        <Mute className='col'/>
-      </div>
-      <div className='row'>
-        <Left className='col'/>
-        <Press className='col'/>
-        <Right className='col'/>
-      </div>
-      <div className='row'>
-        <Back className='col'/>
-        <Down className='col'/>
-        <Home className='col'/>
-      </div>
+    <div className="container btn-group btn-matrix">
+        <VolumeController/>
+        <Up/>
+        <Mute/>
+        <Left />
+        <Press />
+        <Right />
+        <Back />
+        <Down />
+        <Home />
     </div>
   );
 }
