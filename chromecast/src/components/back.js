@@ -1,9 +1,9 @@
 
 import './manette.css';
 
-function back() {
+function back(props) {
   return (
-    <button className="btn btn-danger back"><i class="bi bi-arrow-return-left"></i></button>
+    <button className="btn btn-danger back" onClick={props.click}><i class="bi bi-arrow-return-left"></i></button>
   );
 }
 

@@ -1,9 +1,9 @@
 
 import './manette.css';
 
-function up() {
+function up(props) {
   return (
-    <button className="btn btn-primary up"><i class="bi bi-caret-up-fill"></i></button>
+    <button className="btn btn-primary up" onClick={props.click}><i class="bi bi-caret-up-fill"></i></button>
   );
 }
 

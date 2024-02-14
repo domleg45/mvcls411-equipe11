@@ -1,9 +1,9 @@
 
 import './manette.css';
 
-function volumeController() {
+function volumeController(props) {
   return (
-    <button className="btn btn-secondary volume"><i class="bi bi-volume-up-fill"></i></button>
+    <button className="btn btn-secondary volume" onClick={props.click}><i class="bi bi-volume-up-fill"></i></button>
   );
 }
 

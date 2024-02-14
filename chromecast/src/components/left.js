@@ -1,9 +1,9 @@
 
 import './manette.css';
 
-function left() {
+function left(props) {
   return (
-    <button className="btn btn-primary left"><i class="bi bi-caret-left-fill"></i></button>
+    <button className="btn btn-primary left" onClick={props.click}><i class="bi bi-caret-left-fill"></i></button>
   );
 }
 

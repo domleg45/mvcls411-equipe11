@@ -1,9 +1,9 @@
 
 import './manette.css';
 
-function press() {
+function press(props) {
   return (
-    <button className="btn btn-warning press connect"><i class="bi bi-dash-circle-fill"></i></button>
+    <button className="btn btn-warning press connect" onClick={props.click}><i class="bi bi-dash-circle-fill"></i></button>
   );
 }
 

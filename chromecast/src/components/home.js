@@ -1,9 +1,9 @@
 
 import './manette.css';
 
-function home() {
+function home(props) {
   return (
-    <button className="btn btn-success home"><i class="bi bi-house-door-fill"></i></button>
+    <button className="btn btn-success home" onClick={props.click}><i class="bi bi-house-door-fill"></i></button>
   );
 }
 

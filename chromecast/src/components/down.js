@@ -1,9 +1,9 @@
 
 import './manette.css';
 
-function down() {
+function down(props) {
   return (
-    <button className="btn btn-primary down"><i class="bi bi-caret-down-fill"></i></button>
+    <button className="btn btn-primary down" onClick={props.click}><i class="bi bi-caret-down-fill"></i></button>
   );
 }
 

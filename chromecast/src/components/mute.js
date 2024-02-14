@@ -1,9 +1,9 @@
 
 import './manette.css';
 
-function mute() {
+function mute(props) {
   return (
-    <button className="btn btn-dark mute"><i class="bi bi-volume-mute-fill"></i></button>
+    <button className="btn btn-dark mute" onClick={props.click}><i class="bi bi-volume-mute-fill"></i></button>
   );
 }
 
