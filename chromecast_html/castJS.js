@@ -37,14 +37,6 @@ startBtn.addEventListener('click', () => {
     }
 });
 
-function receiverListener(availability) {
-    if (availability === chrome.cast.ReceiverAvailability.AVAILABLE) {
-        document.getElementById('connectButton').style.display = 'block';
-    } else {
-        document.getElementById('connectButton').style.display = 'none';
-    }
-}
-
 function initializeApiOnly() {
     
     const sessionRequest = new chrome.cast.SessionRequest(applicationID);
