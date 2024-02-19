@@ -5,15 +5,13 @@ let currentVideoIndex = 0;
 let currentVideoUrl;
 let updateInterval;
 
-const volumeBtn = document.getElementById('volumeBtn');
-const upBtn = document.getElementById('upBtn');
+const lowVolBtn = document.getElementById('lowVolBtn');
+const highVolBtn = document.getElementById('highVolBtn');
 const muteBtn = document.getElementById('muteBtn');
-const leftBtn = document.getElementById('leftBtn');
-const pressBtn = document.getElementById('pressBtn');
-const rightBtn = document.getElementById('rightBtn');
+
 const backBtn = document.getElementById('backBtn');
-const downBtn = document.getElementById('downBtn');
-const homeBtn = document.getElementById('homeBtn');
+const pressBtn = document.getElementById('pressBtn');
+const nextBtn = document.getElementById('nextBtn');
 
 document.getElementById('connectButton').addEventListener('click', () => {
     initializeApiOnly();
@@ -35,11 +33,11 @@ function initializeApiOnly() {
     chrome.cast.initialize(apiConfig, onInitSuccess, onError);
 }
 
-volumeBtn.addEventListener('click', () => {
+lowVolBtn.addEventListener('click', () => {
     
 });
 
-upBtn.addEventListener('click', () => {
+highVolBtn.addEventListener('click', () => {
     
 });
 
@@ -47,26 +45,13 @@ muteBtn.addEventListener('click', () => {
     
 });
 
-leftBtn.addEventListener('click', () => {
+backBtn.addEventListener('click', () => {
     
 });
-
 pressBtn.addEventListener('click', () => {
     
 });
 
-rightBtn.addEventListener('click', () => {
-    
-});
-
-backBtn.addEventListener('click', () => {
-    
-});
-
-downBtn.addEventListener('click', () => {
-    
-});
-
-homeBtn.addEventListener('click', () => {
+nextBtn.addEventListener('click', () => {
     
 });
