@@ -104,6 +104,7 @@ muteBtn.addEventListener('click', () => {
         const volume = new chrome.cast.Volume(lastVolumeLevel, false);
         const volumeRequest = new chrome.cast.media.VolumeRequest(volume);
         currentMediaSession.setVolume(volumeRequest, onMediaCommandSuccess, onError)
+        //Uncaught SyntaxError: Unexpected token '<'
         muteBtn.innerHTML(<i class="bi bi-volume-mute-fill"></i>)
     } else {
         const volume = new chrome.cast.Volume(0, true);
