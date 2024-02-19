@@ -1,3 +1,11 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
 .header{
+    padding: 20px;
+}
+.connect{
+    margin: 20px;
+}
+.col{
     padding: 20px;
 }
