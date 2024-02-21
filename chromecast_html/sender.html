@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="./sender.css">
     <title>sender</title>
 </head>
-<body>
+<body class="body">
     <div class="header">
-        <h1>
+        <h1 class="title">
             ChromeCast
         </h1>
         <button class="btn btn-success connect" id="connectButton">
@@ -21,15 +21,25 @@
         </button>
     </div>
     <div class="container grid text-center">
-        <div class="row">
-            <button class="btn btn-secondary volume col" id="lowVolBtn"><i class="bi bi-volume-down-fill"></i></button>
-            <button class="btn btn-primary up col" id="HighVolBtn"><i class="bi bi-volume-up-fill"></i></button>
-            <button class="btn btn-dark mute col" id="muteBtn"><i class="bi bi-volume-mute-fill" id="muteIcon"></i></button>
+        <div class="row textRow">
+            <h5 class="col textCol">Lower Volume</h5>
+            <h5 class="col textCol">Higher Volume</h5>
+            <h5 class="col textCol">Mute/Unmute</h5>
         </div>
-        <div class="row">
-            <button class="btn btn-danger back col" id="backBtn"><i class="bi bi-arrow-return-left"></i></button>
-            <button class="btn btn-warning press col" id="pressBtn"><i class="bi bi-pause-fill" id="pressIcon"></i></button>
-            <button class="btn btn-success next col" id="nextBtn"><i class="bi bi-arrow-return-right"></i></button>
+        <div class="row btnRow">
+            <button class="btn btn-secondary volume col btnCol" id="lowVolBtn"><i class="bi bi-volume-down-fill"></i></button>
+            <button class="btn btn-primary up col btnCol" id="HighVolBtn"><i class="bi bi-volume-up-fill"></i></button>
+            <button class="btn btn-light mute col btnCol" id="muteBtn"><i class="bi bi-volume-mute-fill" id="muteIcon"></i></button>
+        </div>
+        <div class="row textRow">
+            <h5 class="col textCol">Back</h5>
+            <h5 class="col textCol">Pause/Play</h5>
+            <h5 class="col textCol">Next</h5>
+        </div>
+        <div class="row btnRow">
+            <button class="btn btn-danger back col btnCol" id="backBtn"><i class="bi bi-arrow-return-left"></i></button>
+            <button class="btn btn-warning press col btnCol" id="pressBtn"><i class="bi bi-pause-fill" id="pressIcon"></i></button>
+            <button class="btn btn-success next col btnCol" id="nextBtn"><i class="bi bi-arrow-return-right"></i></button>
         </div>
     </div>
     <script src="castJS.js" type="module"></script>
