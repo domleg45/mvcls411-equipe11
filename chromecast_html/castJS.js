@@ -25,6 +25,9 @@ const nextBtn = document.getElementById('nextBtn');
 const connectBtn = document.getElementById('connectButton');
 const startBtn = document.getElementById('startButton');
 
+const muteIcon = document.getElementById('muteIcon');
+const pressIcon = document.getElementById('pressIcon')
+
 connectBtn.addEventListener('click', () => {
     initializeApiOnly();
 });
@@ -103,14 +106,13 @@ muteBtn.addEventListener('click', () => {
     if (currentMediaSession.volume.muted) {
         const volume = new chrome.cast.Volume(lastVolumeLevel, false);
         const volumeRequest = new chrome.cast.media.VolumeRequest(volume);
-        currentMediaSession.setVolume(volumeRequest, onMediaCommandSuccess, onError)
-        //Uncaught SyntaxError: Unexpected token '<'
-        muteBtn.innerHTML(<i class="bi bi-volume-mute-fill"></i>)
+        currentMediaSession.setVolume(volumeRequest, onMediaCommandSuccess, onError);
+        muteIcon.className = "bi bi-volume-mute-fill";
     } else {
         const volume = new chrome.cast.Volume(0, true);
         const volumeRequest = new chrome.cast.media.VolumeRequest(volume);
-        currentMediaSession.setVolume(volumeRequest, onMediaCommandSuccess, onError)
-        muteBtn.innerHTML(<i class="bi bi-volume-off-fill"></i>)
+        currentMediaSession.setVolume(volumeRequest, onMediaCommandSuccess, onError);
+        muteIcon.className = "bi bi-volume-off-fill";
     }
 });
 
@@ -132,10 +134,10 @@ pressBtn.addEventListener('click', () => {
     if (currentMediaSession) {
         if (isPlaying) {
             currentMediaSession.pause(null, onMediaCommandSuccess, onError);
-            pressBtn.innerHTML(<i class="bi bi-play-fill"></i>)
+            pressIcon.className = "bi bi-play-fill";
         } else {
             currentMediaSession.play(null, onMediaCommandSuccess, onError);
-            pressBtn.innerHTML(<i class="bi bi-pause-fill"></i>)
+            pressIcon.className = "bi bi-pause-fill";
         }
         isPlaying = !isPlaying;
     }
