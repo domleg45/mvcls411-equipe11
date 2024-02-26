@@ -6,6 +6,7 @@ let currentVolume = 0.5;
 let currentVideoIndex = 0;
 let currentVideoUrl;
 let updateInterval;
+let lastVolumeLevel = 1.0;
 const defaultContentType = 'video/mp4';
 const applicationID = '3DDC41A0';
 const videoList = [
@@ -15,7 +16,7 @@ const videoList = [
 ];
 
 const lowVolBtn = document.getElementById('lowVolBtn');
-const highVolBtn = document.getElementById('highVolBtn');
+const highVolBtn = document.getElementById('HighVolBtn');
 const muteBtn = document.getElementById('muteBtn');
 
 const backBtn = document.getElementById('backBtn');
@@ -24,9 +25,9 @@ const nextBtn = document.getElementById('nextBtn');
 
 const connectBtn = document.getElementById('connectButton');
 const startBtn = document.getElementById('startButton');
-
-const muteIcon = document.getElementById('muteIcon');
-const pressIcon = document.getElementById('pressIcon')
+const pressIcon = document.getElementById('pressIcon');
+const muteText = document.getElementById('muteText');
+const pressText = document.getElementById('pressText');
 
 connectBtn.addEventListener('click', () => {
     initializeApiOnly();
@@ -65,24 +66,26 @@ function onInitSuccess() {
 }
 
 function onError(error) {
-    console.error('Chromecast initialization error', error);
+    console.error('Chromecast initialization error', error)
 }
 
 function onMediaCommandSuccess() {
     console.log('Media command success');
 }
 
+function initializeMedia(mediaSession) {
+    currentMediaSession = mediaSession;
+ }
+
 //Initiates the variables when connected
 function loadMedia(videoUrl) {
     currentVideoUrl = videoUrl;
     const mediaInfo = new chrome.cast.media.MediaInfo(videoUrl, defaultContentType);
     const request = new chrome.cast.media.LoadRequest(mediaInfo);
-    const remotePlayer = new cast.framework.RemotePlayer();
-    const remotePlayerController = new cast.framework.RemotePlayerController(remotePlayer);
 
     currentSession.loadMedia(request, mediaSession => {
         console.log('Media chargé avec succès');
-        initializeSeekSlider(remotePlayerController, mediaSession);
+        initializeMedia(mediaSession);
       }, onError);
 }
 
@@ -93,22 +96,28 @@ function changeVolume(currentMediaSession) {
 }
 
 lowVolBtn.addEventListener('click', () => {
-    currentVolume --;
+    if(currentVolume != 0){
+    currentVolume = currentVolume - 0.1;
     changeVolume(currentMediaSession);
+    }
 });
 
 highVolBtn.addEventListener('click', () => {
-    currentVolume ++;
+    if(currentVolume !=1){
+    currentVolume = currentVolume + 0.1;
     changeVolume(currentMediaSession);
+    }
 });
 
 muteBtn.addEventListener('click', () => {
     if (currentMediaSession.volume.muted) {
+        muteText.textContent = "Mute";
         const volume = new chrome.cast.Volume(lastVolumeLevel, false);
         const volumeRequest = new chrome.cast.media.VolumeRequest(volume);
         currentMediaSession.setVolume(volumeRequest, onMediaCommandSuccess, onError);
         muteIcon.className = "bi bi-volume-mute-fill";
     } else {
+        muteText.textContent = "Unmute";
         const volume = new chrome.cast.Volume(0, true);
         const volumeRequest = new chrome.cast.media.VolumeRequest(volume);
         currentMediaSession.setVolume(volumeRequest, onMediaCommandSuccess, onError);
@@ -119,12 +128,9 @@ muteBtn.addEventListener('click', () => {
 backBtn.addEventListener('click', () => {
     if (currentSession) {
         if(currentVideoIndex == 0){
-            currentVideoIndex = videoList.length - 1;
-            loadMedia(videoList[currentVideoIndex]);
+            currentVideoIndex = videoList.length;
         }
-        else{
-            loadMedia(videoList[currentVideoIndex - 1]);
-        }
+        loadMedia(videoList[currentVideoIndex - 1]);
     } else {
         alert('Connectez-vous sur chromecast en premier');
     }
@@ -133,9 +139,11 @@ backBtn.addEventListener('click', () => {
 pressBtn.addEventListener('click', () => {
     if (currentMediaSession) {
         if (isPlaying) {
+            pressText.textContent = "Play";
             currentMediaSession.pause(null, onMediaCommandSuccess, onError);
             pressIcon.className = "bi bi-play-fill";
         } else {
+            pressText.textContent = "Pause";
             currentMediaSession.play(null, onMediaCommandSuccess, onError);
             pressIcon.className = "bi bi-pause-fill";
         }
