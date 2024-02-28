@@ -30,6 +30,20 @@
     padding-left: 30px;
     padding-right: 30px;
 }
+.timeRow{
+    padding-top: 30px;
+}
 .btn{
     margin: 20px;
+}
+.time{
+    color: white;
+    width: 10%;
+}
+.slider{
+    width: 80%;
+}
+.skipRow{
+    margin-left: 30%;
+    margin-right: 30%;
 }

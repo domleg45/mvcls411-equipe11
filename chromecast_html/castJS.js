@@ -7,6 +7,9 @@ let currentVideoIndex = 0;
 let currentVideoUrl;
 let updateInterval;
 let lastVolumeLevel = 1.0;
+const seekSlider = document.getElementById('seekSlider');
+const currentTimeElement = document.getElementById('currentTime');
+const totalTimeElement = document.getElementById('totalTime');
 const defaultContentType = 'video/mp4';
 const applicationID = '3DDC41A0';
 const videoList = [
@@ -22,6 +25,9 @@ const muteBtn = document.getElementById('muteBtn');
 const backBtn = document.getElementById('backBtn');
 const pressBtn = document.getElementById('pressBtn');
 const nextBtn = document.getElementById('nextBtn');
+
+const skipBtn = document.getElementById("skipBtn");
+const backwardBtn = document.getElementById("backwardBtn")
 
 const connectBtn = document.getElementById('connectButton');
 const disconnectBtn = document.getElementById('disconnectBtn')
@@ -90,9 +96,52 @@ function onMediaCommandSuccess() {
     console.log('Media command success');
 }
 
-function initializeMedia(mediaSession) {
+function initializeMediaAndSlider(mediaSession) {
     currentMediaSession = mediaSession;
+    document.getElementById('playBtn').style.display = 'block';
+   // Set max value of seek slider to media duration in seconds
+   seekSlider.max = mediaSession.media.duration;
+
+    // Update seek slider and time elements on time update
+    updateInterval = setInterval(() => {
+        const currentTime = mediaSession.getEstimatedTime();
+        const totalTime = mediaSession.media.duration;
+  
+        seekSlider.value = currentTime;
+        currentTimeElement.textContent = formatTime(currentTime);
+        totalTimeElement.textContent = formatTime(totalTime);
+      }, 1000); //chaque 1000 ms... 1 sec
+  
+      // slider change
+      seekSlider.addEventListener('input', () => {
+        const seekTime = parseFloat(seekSlider.value);
+        remotePlayerController.seek(seekTime);
+      });
  }
+
+skipBtn.addEventListener('click', () => {
+    const currentTime = mediaSession.getEstimatedTime();
+    if(currentTime >= mediaSession.media.duration - 10){
+        remotePlayerController.seek(mediaSession.media.duration);
+        currentTime = mediaSession.media.duration;
+    }
+    else{
+        remotePlayerController.seek(currentTime + 10);
+        currentTime += 10;
+    }
+});
+
+backwardBtn.addEventListener('click', () => {
+    const currentTime = mediaSession.getEstimatedTime();
+    if(currentTime <= 10){
+        remotePlayerController.seek(0);
+        currentTime = 0;
+    }
+    else{
+        remotePlayerController.seek(currentTime - 10);
+        currentTime -= 10;
+    }
+})
 
 //Initiates the variables when connected
 function loadMedia(videoUrl) {
@@ -102,7 +151,7 @@ function loadMedia(videoUrl) {
 
     currentSession.loadMedia(request, mediaSession => {
         console.log('Media chargé avec succès');
-        initializeMedia(mediaSession);
+        initializeMediaAndSlider(mediaSession);
       }, onError);
 }
 
