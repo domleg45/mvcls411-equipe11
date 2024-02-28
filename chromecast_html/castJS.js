@@ -24,6 +24,7 @@ const pressBtn = document.getElementById('pressBtn');
 const nextBtn = document.getElementById('nextBtn');
 
 const connectBtn = document.getElementById('connectButton');
+const disconnectBtn = document.getElementById('disconnectBtn')
 const startBtn = document.getElementById('startButton');
 const pressIcon = document.getElementById('pressIcon');
 const muteText = document.getElementById('muteText');
@@ -31,6 +32,22 @@ const pressText = document.getElementById('pressText');
 
 connectBtn.addEventListener('click', () => {
     initializeApiOnly();
+});
+
+function onCorrectLeave() {
+    console.log('Disconnected')
+}
+
+function onWrongLeave(error) {
+    console.error('Chromecast disconnection error', error)
+}
+
+disconnectBtn.addEventListener('click', () => {
+    if(currentSession) {
+        currentSession.leave(onCorrectLeave, onWrongLeave);
+    } else {
+        alert("Vous n'êtes pas connecté")
+    }
 });
 
 startBtn.addEventListener('click', () => {
