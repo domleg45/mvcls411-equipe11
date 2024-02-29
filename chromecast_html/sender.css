@@ -1,6 +1,7 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 .body{
     background-color: #222222;
+    padding-top: 5%;
 }
 .title{
     color: white;
@@ -20,6 +21,10 @@
 .textCol{
     color: white;
     vertical-align: bottom;
+}
+.connectRow{
+    margin-left: 30%;
+    margin-right: 30%;
 }
 .btnRow{
     padding-left: 30px;
@@ -46,4 +51,7 @@
 .skipRow{
     margin-left: 30%;
     margin-right: 30%;
+}
+.rest{
+    padding-top: 2%;
 }
