@@ -7,7 +7,6 @@ let currentVideoIndex = 0;
 let currentVideoUrl;
 let updateInterval;
 let lastVolumeLevel = 1.0;
-const seekSlider = document.getElementById('seekSlider');
 const currentTimeElement = document.getElementById('currentTime');
 const totalTimeElement = document.getElementById('totalTime');
 const defaultContentType = 'video/mp4';
@@ -96,50 +95,33 @@ function onMediaCommandSuccess() {
     console.log('Media command success');
 }
 
-function initializeMediaAndSlider(mediaSession) {
+function initializeMedia(mediaSession) {
     currentMediaSession = mediaSession;
-    document.getElementById('playBtn').style.display = 'block';
-   // Set max value of seek slider to media duration in seconds
-   seekSlider.max = mediaSession.media.duration;
-
-    // Update seek slider and time elements on time update
-    updateInterval = setInterval(() => {
-        const currentTime = mediaSession.getEstimatedTime();
-        const totalTime = mediaSession.media.duration;
-  
-        seekSlider.value = currentTime;
-        currentTimeElement.textContent = formatTime(currentTime);
-        totalTimeElement.textContent = formatTime(totalTime);
-      }, 1000); //chaque 1000 ms... 1 sec
-  
-      // slider change
-      seekSlider.addEventListener('input', () => {
-        const seekTime = parseFloat(seekSlider.value);
-        remotePlayerController.seek(seekTime);
-      });
  }
 
 skipBtn.addEventListener('click', () => {
-    const currentTime = mediaSession.getEstimatedTime();
-    if(currentTime >= mediaSession.media.duration - 10){
-        remotePlayerController.seek(mediaSession.media.duration);
-        currentTime = mediaSession.media.duration;
+    const seekRequest = new chrome.cast.media.SeekRequest();
+    const currentTime = currentMediaSession.getEstimatedTime();
+    if(currentTime >= currentMediaSession.media.duration - 10){
+        seekRequest.currentTime = mediaSession.media.duration;
+        currentMediaSession.seek(seekRequest);
     }
     else{
-        remotePlayerController.seek(currentTime + 10);
-        currentTime += 10;
+        seekRequest.currentTime = currentTime + 10;
+        currentMediaSession.seek(seekRequest);
     }
 });
 
 backwardBtn.addEventListener('click', () => {
-    const currentTime = mediaSession.getEstimatedTime();
+    const seekRequest = new chrome.cast.media.SeekRequest();
+    const currentTime = currentMediaSession.getEstimatedTime();
     if(currentTime <= 10){
-        remotePlayerController.seek(0);
-        currentTime = 0;
+        seekRequest.currentTime = 0;
+        currentMediaSession.seek(seekRequest);
     }
     else{
-        remotePlayerController.seek(currentTime - 10);
-        currentTime -= 10;
+        seekRequest.currentTime = currentTime - 10;
+        currentMediaSession.seek(seekRequest);
     }
 })
 
@@ -151,7 +133,7 @@ function loadMedia(videoUrl) {
 
     currentSession.loadMedia(request, mediaSession => {
         console.log('Media chargé avec succès');
-        initializeMediaAndSlider(mediaSession);
+        initializeMedia(mediaSession);
       }, onError);
 }
 
