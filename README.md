@@ -11,4 +11,4 @@ La manette permet de manipuler une liste de vidéos en manipulant plusieurs bout
 
 Durant le développement de notre manette, nous avons parcouru divers obstacles comme l'utilisation de React qui était déconseillé et nous a fait perdre beaucoup de temps, et notre migration vers du HTML et Javascript simple, ce qui nous a mis en retard par rapport aux autres.
 
-On était également trop optimiste sur certaines fonctionnalités auquel il n'était possible pour nous de réaliser, vue dans la première maquette avec des boutons directionnels et un bouton « Home ».
+On était également trop optimiste sur certaines fonctionnalités auquel il n'était pas possible pour nous de réaliser, vue dans la première maquette avec des boutons directionnels et un bouton « Home ».
